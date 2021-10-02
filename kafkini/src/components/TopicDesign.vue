@@ -9,6 +9,39 @@
     <label for="msgType">Dataset: </label><input type="text" id="msgDesc" v-model="msgDesc"><br>
     <label for="msgType">Environment: </label><input type="text" id="msgEnv" v-model="msgEnv"><br>
   </form>
+
+  <br>
+
+  <form>
+    <details>
+      <summary><input type="text" id="msgEnv" v-model="msgEnv">
+Replication Factor</summary>
+      <p>How many copies of your data there will be in the cluster</p>
+    </details>
+
+    <details>
+      <summary><input type="text" id="msgEnv" v-model="msgEnv">
+Partitions</summary>
+      <p>Unit of parallelization</p>
+    </details>
+
+    <details>
+      <summary>Compacted Topic <input type="checkbox" id="compacted" name="compacted" v-model="configCompacted"></summary>
+      <p>This means your topic is squished af</p>
+    </details>
+  </form>
+
+  <code><pre>
+resource "kafka_topic" "logs" {
+  name               = "{{ msgDesc }}"
+  replication_factor = {{ replicationFactor }}
+  partitions         = {{ partitions }}
+
+  config = {
+    <span v-if="configCompacted">"cleanup.policy" = "compact"</span>
+  }
+}
+  </pre></code>
 </template>
 
 <script>
@@ -20,6 +53,11 @@
         msgDomain: "cards",
         msgDesc: "donut service",
         msgEnv: "prod",
+
+        replicationFactor: 3,
+        partitions: 3,
+
+        configCompacted: true,
       };
     }
   }
