@@ -1,6 +1,6 @@
 <template>
   <h3>Topic: <span id="topicName">
-      <span class="topicElement">{{ msgType }}</span>.<span class="topicElement">{{ msgDomain }}</span>.<span class="topicElement">{{ msgDesc }}</span>.<span class="topicElement">{{ msgEnv }}</span>
+      <span class="topicElement">{{ getTopicName() }}</span>
   </span></h3>
 
   <form>
@@ -14,14 +14,12 @@
 
   <form>
     <details>
-      <summary><input type="text" id="msgEnv" v-model="msgEnv">
-Replication Factor</summary>
+      <summary><input type="text" id="replicationFactor" v-model="replicationFactor"> Replication Factor</summary>
       <p>How many copies of your data there will be in the cluster</p>
     </details>
 
     <details>
-      <summary><input type="text" id="msgEnv" v-model="msgEnv">
-Partitions</summary>
+      <summary><input type="text" id="partitions" v-model="partitions"> Partitions</summary>
       <p>Unit of parallelization</p>
     </details>
 
@@ -33,7 +31,7 @@ Partitions</summary>
 
   <code><pre>
 resource "kafka_topic" "logs" {
-  name               = "{{ msgDesc }}"
+  name               = "{{ getTopicName() }}"
   replication_factor = {{ replicationFactor }}
   partitions         = {{ partitions }}
 
@@ -59,6 +57,15 @@ resource "kafka_topic" "logs" {
 
         configCompacted: true,
       };
+    },
+    methods: {
+        getTopicName() {
+            let topicName = this.msgType + '.' + this.msgDomain + '.' + this.msgDesc + '.' + this.msgEnv
+            topicName = topicName.toLowerCase()
+            topicName = topicName.replace(' ', '_');
+            topicName = topicName.replace('-', '_');
+            return topicName;
+        }
     }
   }
 </script>

@@ -19,3 +19,11 @@ cd kafkini
 # Start development server on 8080
 yarn serve
 ```
+
+## Random Notes
+
+https://stackoverflow.com/questions/47638650/how-to-bind-vue-data-to-a-dropdown
+
+- v-if
+- v-show
+- v-hide
