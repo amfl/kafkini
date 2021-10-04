@@ -8,6 +8,12 @@ configs for [Mongey's Kafka Terraform provider][tf_mongey].
 It's designed to help non-experts choose the relevant configuration options and
 to enforce topic naming standards.
 
+## Project Status
+
+Working proof-of-concept only.
+
+This is not a completed project.
+
 ## Setup
 
 Following <https://www.blog.duomly.com/vue-js-tutorial-how-to-create-vue-js-app-in-5-minutes/#1-install-vue-cli>
