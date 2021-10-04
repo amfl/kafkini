@@ -1,65 +1,60 @@
-# kafkini
+# Kafkini
 
-## Project setup
-```
-yarn install
-```
+_The Great Kafkini knows what the users want!_
 
-### Compiles and hot-reloads for development
-```
-yarn serve
-```
+Kafkini is a single-page Vue app which lets people fill out a form to produce
+configs for [Mongey's Kafka Terraform provider][tf_mongey].
 
-### Compiles and minifies for production
-```
-yarn build
-```
-
-### Lints and fixes files
-```
-yarn lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
-# Kafka Terraform Generation
-
-A simple form for people to fill out which will help them design topics.
+It's designed to help non-experts choose the relevant configuration options and
+to enforce topic naming standards.
 
 ## Setup
 
 Following <https://www.blog.duomly.com/vue-js-tutorial-how-to-create-vue-js-app-in-5-minutes/#1-install-vue-cli>
 
-If you don't have node installed, you can pop into a docker container with it
-by running `./run.sh` before running through these steps.
-
-Initial project setup (You shouldn't need to do this):
+**Initial project setup (You shouldn't need to do this):**
 
 ```bash
+# get into an environment with node, yarn, etc
+./run-development-container.sh
+
 npm install yarn
 yarn global add @vue/cli
 
-# Initial project setup - Only need to do this once.
-
 vue create kafkini
-# Vue3 default
+# Choose Vue3 defaults
 ```
 
-Development setup:
+See also: [Vue Configuration Reference](https://cli.vuejs.org/config/).
+
+**Development setup:**
 
 ```bash
-cd kafkini
-# Start development server on 8080
+# get into an environment with node, yarn, etc
+./run-development-container.sh
+# Install deps (populates `node_modules` dir on host)
+yarn install
+# Run the linter if desired
+yarn lint
+# Start development server with live reload on 8080
 yarn serve
 ```
 
-Production setup:
+**Production setup:**
 
 ```bash
 yarn build
 # Now we are ready to serve via any webserver
 # For example
 cd dist && python3 -m http.server 8000
+```
+
+**Production docker:**
+
+```bash
+docker build . -t kafkini:latest
+# Running will look something like this
+docker run --rm -it -p 8080:8080 kafkini:latest
 ```
 
 ## Random Notes
@@ -69,3 +64,5 @@ cd dist && python3 -m http.server 8000
 - v-if
 - v-show
 - v-hide
+
+[tf_mongey]: <https://registry.terraform.io/providers/Mongey/kafka/latest>
