@@ -47,7 +47,7 @@
   </form>
 
   <code><pre>
-resource "kafka_topic" "logs" {
+resource "kafka_topic" "{{ getModuleName() }}" {
   name               = "{{ getTopicName() }}"
   replication_factor = {{ replicationFactor }}
   partitions         = {{ partitions }}
@@ -85,6 +85,9 @@ resource "kafka_topic" "logs" {
             topicName = topicName.replaceAll(' ', '_');
             topicName = topicName.replaceAll('-', '_');
             return topicName;
+        },
+        getModuleName() {
+            return this.getTopicName().replaceAll('.', '_');
         },
         envs() {
             return [
