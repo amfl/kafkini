@@ -8,6 +8,8 @@ configs for [Mongey's Kafka Terraform provider][tf_mongey].
 It's designed to help non-experts choose the relevant configuration options and
 to enforce topic naming standards.
 
+![Screenshot](demo.png)
+
 ## Project Status
 
 Working proof-of-concept only.
